@@ -1,0 +1,26 @@
+
+body{
+    background-color: rgba(199, 199, 199, 0.322);
+}
+.main-container{
+    /* background-color: blue; */
+    margin: auto;
+    width: 60%;
+    height: 86vh;
+    box-shadow: 0px 0px 10px 0px rgba(66, 65, 65, 0.438);
+    background-color: rgba(255, 255, 255, 0.685);
+    overflow: auto;
+}
+
+.card-container{
+    width: 100%;
+    /* scroll-behavior: smooth;
+    height: 92vh; */
+}
+.footer{
+    position: fixed;
+    width: 59.2%;
+    bottom: 5%;
+    background-color: #EB81EE;
+    box-shadow: 0px 0px 10px 0px rgba(66, 65, 65, 0.438);
+}

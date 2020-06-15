@@ -1,0 +1,91 @@
+.btn-rectangle {
+  border: none;
+  padding: 5px 25px 5px 25px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 5px 2px;
+  cursor: pointer;
+  background-color: #9acd32;
+  border-radius: 5px;
+}
+
+.btn-circle {
+  border: none;
+  padding: 5px 10px 5px 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 5px 0px 0px 30px;
+  cursor: pointer;
+  background-color: #9acd32;
+  border-radius: 50%;
+}
+
+.main-card {
+  padding: 2% 1% 10% 10%;
+}
+
+.card-body {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  border-bottom: solid rgba(0, 0, 0, 0.246) 2px;
+}
+
+.left-card-body {
+  width: 30%;
+  /* text-align: center; */
+}
+
+.product-img {
+  /* width: 10%; */
+}
+
+.product-btns {
+  display: flex;
+}
+.product-off-text{
+    padding: 10px;
+    font-size: 18px;
+}
+
+.inc-desc-value{
+    margin: 10px 0px 0px 20px;
+    font-weight: bold;
+    font-size: 16px;
+}
+.btn-inc-desc {
+  display: flex;
+}
+
+.product {
+  padding: 0px 0px 15px 0px;
+  font-size: 18px;
+}
+.product-brand {
+  color: green;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.product-rs {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.footer-container {
+  display: flex;
+}
+.footer-left {
+  width: 60%;
+  padding: 5px;
+  color: #1d3070;
+  font-size: 1.5vw;
+  font-weight: bold;
+}
+.footer-right {
+  width: 30%;
+  padding: 5px;
+}
