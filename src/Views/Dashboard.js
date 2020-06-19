@@ -14,8 +14,15 @@ class Dashboard extends Component {
         total: 0,
         toggle: false,
       },
-      cardData: getJsonData(),
+      cardData: [],
     };
+  }
+
+  componentDidMount(){
+    getJsonData()
+      .then((cardData)=>{
+      this.setState({ cardData})
+    }).catch((e)=>console.log(e))
   }
 
   cartIncreement=(price, qty)=>{

@@ -1,5 +1,7 @@
 
 import data from "./jsonData.json"
 export const getJsonData=()=>{
- return data;
+    return new Promise(async(resolve, reject)=>{
+        resolve(data)
+    })
 }
