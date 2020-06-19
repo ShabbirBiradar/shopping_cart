@@ -2,124 +2,82 @@ import React, { Component } from "react";
 import "./style.css";
 import Footer from "../Components/Footer";
 import Card from "../Components/Card";
+import Modal from "../Components/Modal";
+import { getJsonData } from "../datastore/index";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cardData: [
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        },
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        },
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        },
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        },
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        },
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        },
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        },
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        },
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        },
-        {
-          brandName: "Milk Food",
-          productName: "Milk Good Rich Desi Deneder Ghee (Carton)",
-          qty: 11,
-          price: 408,
-          mrf: 489,
-          url:
-            "http://images.amazon.com/images/P/0596004613.01._PE30_PI_SCMZZZZZZZ_.jpg",
-          offerText: "18% OFF"
-        }
-      ]
+      footerData:{
+        totalQty: 0,
+        total: 0,
+        toggle: false,
+      },
+      cardData: getJsonData(),
     };
   }
+
+  cartIncreement=(price, qty)=>{
+    const { footerData } = this.state
+    let totalQty = footerData.totalQty + qty;
+    let totalPrice = footerData.total + (price * qty);
+    this.setTotalData(totalPrice, totalQty);
+  }
+
+  cartDecreement = (price, qty)=>{
+    const { footerData } = this.state
+    let totalQty = footerData.totalQty - qty;
+    let totalPrice = footerData.total - (price * qty);
+    this.setTotalData(totalPrice, totalQty);
+  }
+
+  addToCart = () => {
+    const { footerData } = this.state
+    this.setTotalData(footerData.total, footerData.totalQty);
+  }
+
+  setTotalData = (total, totalQty)=>{
+    this.setState({
+      footerData: {
+        ...this.state.footerData,
+        total,
+        totalQty
+      }
+    })
+  }
+
+  handleModal=()=>{
+    this.setState({
+      toggle: !this.state.toggle
+    })
+  }
   render() {
+    const { cardData, footerData, toggle} = this.state;
     return (
-      <React.Fragment>
+      <React.Fragment>    
         <div className="main-container">
+         <Modal 
+            toggle={toggle}
+            handleModal={() => this.handleModal()}
+            data={footerData}
+         />
+          
           <div className="card-container">
-            <Card cardData={this.state.cardData} />
+            {cardData.map((i,k)=>
+              <Card key={k} 
+                cardData={i} 
+                increement={(price, qty) => this.cartIncreement(price, qty)}
+                decreement={(price, qty) => this.cartDecreement(price, qty)}
+                addToCart={() => this.addToCart()}
+              />          
+          )}
           </div>
           <div className="footer">
-            <Footer />
+            <Footer
+             data={footerData}
+             checkout={()=>this.handleModal()}
+             />
           </div>
         </div>
       </React.Fragment>

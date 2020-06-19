@@ -10,7 +10,7 @@ class Button2 extends Component {
   render() {
     return (
       <div className="btn">
-        <button className="btn-circle"> {this.props.name}</button>
+        <button className="btn-circle" onClick={this.props.onClick}> {this.props.name}</button>
       </div>
     );
   }
